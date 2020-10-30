@@ -1,0 +1,125 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+:root {
+  --grey-dark: hsl(0, 0%, 17%);
+  --grey: hsl(0, 0%, 59%);
+  --light: #fff;
+  --dark: #000;
+}
+html {
+  font-size: 62.5%;
+  font-family: "Rubik", sans-serif;
+}
+
+body {
+  box-sizing: inherit;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  flex: 0 0 30%;
+  background-image: url(./images/pattern-bg.png);
+  background-size: cover;
+  position: relative;
+}
+.header__heading {
+  color: var(--light);
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 3rem;
+  font-weight: 400;
+}
+.header__form {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+.header__form__input {
+  border: none;
+  background-color: var(--light);
+  font-size: 1.8rem;
+  padding: 1rem;
+  width: 40%;
+  border-radius: 1rem 0 0 1rem;
+  color: var(--grey-dark);
+  letter-spacing: 0.1rem;
+  transition: all 0.3s ease;
+}
+.header__form__input::placeholder {
+  font-size: 1.8rem;
+  font: inherit;
+  color: var(--grey);
+}
+.header__form__input:focus {
+  outline: none;
+  width: 50%;
+}
+.header__form__button {
+  border: none;
+  background-color: var(--dark);
+  padding: 0 1.5rem;
+  border-radius: 0 1rem 1rem 0;
+  transition: all 0.3s ease;
+  /* to fix the junk pixels */
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.05);
+  outline: 3px solid transparent;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.header__form__button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+.header__form__button:focus {
+  outline: none;
+}
+.header__form__button:active {
+  transform: scale(0.95);
+}
+.panel {
+  width: 70%;
+  background-color: var(--light);
+  display: flex;
+  justify-content: space-around;
+  padding: 3rem;
+  border-radius: 1rem;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(50%);
+  z-index: 10000;
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
+}
+.panel__child {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: space-between;
+  margin-left: 2rem;
+}
+.panel__child:not(:last-child) {
+  border-right: 0.1rem solid var(--grey);
+}
+.panel__title {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.1rem;
+  color: var(--grey);
+}
+.panel__detail {
+  color: var(--grey-dark);
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+#map {
+  flex: 1;
+}
