@@ -16,7 +16,15 @@ function updateMap(lat, lng) {
 
 const form = document.querySelector(".header__form");
 const input = document.querySelector(".header__form__input");
+const panel = document.querySelector(".panel");
+const mapRef = document.querySelector("#map");
 
+input.addEventListener("focus", (e) => {
+  panel.style.display = "none";
+});
+mapRef.addEventListener("click", (e) => {
+  panel.style.display = "none";
+});
 function updateInfo(title, info) {
   let qs = "." + title + " " + ".panel__detail";
   console.log(qs);
@@ -56,6 +64,8 @@ form.addEventListener("submit", (e) => {
       updateInfo("timezone", data.location.timezone);
       updateInfo("isp", data.isp);
       input.value = "";
+      panel.style.display = "block";
+
       document.querySelector(".header__form__error").innerHTML = "";
     });
 });
