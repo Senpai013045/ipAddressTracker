@@ -31,9 +31,18 @@ input.addEventListener("blur", (e) => {
 
 function updateInfo(title, info) {
   let qs = "." + title + " " + ".panel__detail";
-  console.log(qs);
   document.querySelector(qs).textContent = info;
 }
+
+// fetch("https://api.myip.com", {
+//   method: "GET",
+//   mode: "cors",
+//   headers:{
+
+//   }
+// }).then((res) => {
+//   console.log(res);
+// });
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -53,7 +62,6 @@ form.addEventListener("submit", (e) => {
   )
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       if (data.code) {
         document.querySelector(".header__form__error").innerHTML =
           data.messages;
