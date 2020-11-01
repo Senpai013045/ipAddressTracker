@@ -7,7 +7,13 @@ L.tileLayer(
     attribution: `<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>`,
   }
 ).addTo(map);
-let marker = L.marker([-33.8688, 151.209]).addTo(map);
+let darkIcon = L.icon({
+  iconUrl: "./images/icon-location.svg",
+
+  iconSize: [28, 35], // size of the icon
+  iconAnchor: [12, 34], // point of the icon which will correspond to marker's location
+});
+let marker = L.marker([-33.8688, 151.209], { icon: darkIcon }).addTo(map);
 
 function updateMap(lat, lng) {
   marker.setLatLng([lat, lng]);
