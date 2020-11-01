@@ -1,6 +1,6 @@
 let map = L.map("map");
 map.setView([-33.8688, 151.209], 0);
-map.flyTo([-33.8688, 151.209], 15);
+map.flyTo([-33.8688, 151.209], 13);
 L.tileLayer(
   "https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=KIgo2TvlDDD69kwl8OUo",
   {
@@ -11,8 +11,45 @@ let marker = L.marker([-33.8688, 151.209]).addTo(map);
 
 function updateMap(lat, lng) {
   marker.setLatLng([lat, lng]);
-  map.flyTo([lat, lng], 15);
+  map.flyTo([lat, lng], 13);
 }
+
+fetch("https://www.cloudflare.com/cdn-cgi/trace")
+  .then((res) => {
+    return res.text();
+  })
+  .then((data) => {
+    let array = data.split("\n");
+    let ipString = array[2];
+    let ip = ipString.match(/ip=(.*)/)[1];
+    fetch(
+      `https://geo.ipify.org/api/v1?apiKey=at_X5XC3rVRJHHfJSpWjDql2Em5rxn1d&ipAddress=${ip}`
+    )
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.code) {
+          document.querySelector(".header__form__error").innerHTML =
+            data.messages;
+        }
+
+        updateMap(data.location.lat, data.location.lng);
+        updateInfo("ip", data.ip);
+        updateInfo(
+          "location",
+          `${data.location.region}, ${data.location.country}, ${data.location.postalCode}`
+        );
+        updateInfo("timezone", data.location.timezone);
+        updateInfo("isp", data.isp);
+        input.value = "";
+        document.querySelector(".header__form__error").innerHTML = "";
+
+        //unfocus the input after submission
+        const temporary = document.createElement("input");
+        document.body.appendChild(temporary);
+        temporary.focus();
+        document.body.removeChild(temporary);
+      });
+  });
 
 const form = document.querySelector(".header__form");
 const input = document.querySelector(".header__form__input");
@@ -33,16 +70,6 @@ function updateInfo(title, info) {
   let qs = "." + title + " " + ".panel__detail";
   document.querySelector(qs).textContent = info;
 }
-
-// fetch("https://api.myip.com", {
-//   method: "GET",
-//   mode: "cors",
-//   headers:{
-
-//   }
-// }).then((res) => {
-//   console.log(res);
-// });
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      fetch("https://www.cloudflare.com/cdn-cgi/trace")
+        .then((res) => {
+          return res.text();
+        })
+        .then((data) => {
+          let array = data.split("\n");
+          let ipString = array[2];
+          let ip = ipString.match(/ip=(.*)/);
+          console.log(ip[1]);
+        });
+    </script>
+  </body>
+</html>
