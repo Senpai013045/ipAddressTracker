@@ -53,6 +53,9 @@ body {
   letter-spacing: 0.1rem;
   transition: all 0.3s ease;
 }
+label {
+  display: none;
+}
 .header__form__input::placeholder {
   font-size: 1.8rem;
   font: inherit;
